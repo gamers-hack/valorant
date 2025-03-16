@@ -1,0 +1,73 @@
+@use 'variables' as *;
+
+// レスポンシブ対応用のmixin
+@mixin sp {
+  @media screen and (max-width: ($breakpoint-md - 1)) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+// フレックスボックス用のmixin
+@mixin flex($justify: flex-start, $align: flex-start, $direction: row) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+// グリッド用のmixin
+@mixin grid($columns: 1fr, $rows: auto, $gap: 0) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  gap: $gap;
+}
+
+// テキスト省略表示用のmixin
+@mixin text-ellipsis($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// BEM記法のためのmixin
+// Block
+@mixin block($block) {
+  .#{$block} {
+    @content;
+  }
+}
+
+// Element
+@mixin element($block, $element) {
+  .#{$block}__#{$element} {
+    @content;
+  }
+}
+
+// Modifier
+@mixin modifier($block, $modifier) {
+  .#{$block}--#{$modifier} {
+    @content;
+  }
+}
+
+// Element with Modifier
+@mixin element-modifier($block, $element, $modifier) {
+  .#{$block}__#{$element}--#{$modifier} {
+    @content;
+  }
+}
