@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { definePageMeta } from '~~/.nuxt/imports';
+import Button from '@/uiParts/Button.vue';
+
+definePageMeta({
+  layout: 'with-header',
+});
+</script>
+
 <template>
   <div class="container">
     <h1>Valorantアプリケーション</h1>
@@ -11,15 +20,9 @@
 
     <div class="scss-example">
       <h2>SCSSサンプル</h2>
-      <ExampleScssComponent />
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import Button from '@/uiParts/Button.vue';
-import ExampleScssComponent from '@/components/ExampleScssComponent.vue';
-</script>
 
 <style lang="scss" scoped>
 .container {
