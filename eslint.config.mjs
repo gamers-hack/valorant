@@ -30,13 +30,60 @@ export default withNuxt([
     },
   },
   {
-    // 相対パスの親ディレクトリ参照を禁止するルール
+    // 相対パスの親ディレクトリ参照を禁止するルール（グローバルルール）
     rules: {
       'no-restricted-imports': [
         'error',
         {
           paths: [],
           patterns: ['../*'],
+        },
+      ],
+    },
+  },
+  {
+    // 相対パスを制限し、@エイリアスの使用を促進するルール（srcディレクトリ内）
+    files: ['**/src/**/*.{js,ts,vue}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [],
+          patterns: [
+            '../*', // 親ディレクトリへの参照を禁止
+          ],
+        },
+      ],
+    },
+  },
+  {
+    // uiPartsからpagesへのインポートを禁止
+    files: ['**/src/uiParts/**/*.{js,ts,vue}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [],
+          patterns: [
+            '**/pages/**', // pagesディレクトリへの参照を禁止
+            '@/pages/**', // エイリアスを使ったpagesディレクトリへの参照も禁止
+          ],
+        },
+      ],
+    },
+  },
+  {
+    // pages内での他のpagesコンポーネントのインポートを禁止
+    files: ['**/src/pages/**/*.{js,ts,vue}'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [],
+          patterns: [
+            '@/pages/**', // エイリアスを使った他のpagesディレクトリへの参照を禁止
+            './*.vue', // 同じディレクトリの他のVueファイルへの参照を禁止
+          ],
         },
       ],
     },

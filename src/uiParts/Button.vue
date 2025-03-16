@@ -1,0 +1,56 @@
+<template>
+  <button
+    class="ui-button"
+    :class="{ 'ui-button--primary': primary, 'ui-button--small': small }"
+    @click="onClick"
+  >
+    <slot />
+  </button>
+</template>
+
+<script setup lang="ts">
+interface Props {
+  primary?: boolean;
+  small?: boolean;
+}
+
+withDefaults(defineProps<Props>(), {
+  primary: false,
+  small: false,
+});
+
+const emit = defineEmits<{
+  (e: 'click', event: MouseEvent): void;
+}>();
+
+const onClick = (event: MouseEvent) => {
+  emit('click', event);
+};
+</script>
+
+<style scoped>
+.ui-button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.ui-button--primary {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+}
+
+.ui-button--small {
+  padding: 6px 12px;
+  font-size: 0.875rem;
+}
+
+.ui-button:hover {
+  opacity: 0.9;
+}
+</style>
