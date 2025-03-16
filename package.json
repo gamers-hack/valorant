@@ -17,7 +17,9 @@
   "dependencies": {
     "@nuxt/eslint": "^1.2.0",
     "eslint": "^9.22.0",
+    "normalize.css": "^8.0.1",
     "nuxt": "^3.16.0",
+    "the-new-css-reset": "^1.11.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
@@ -28,6 +30,8 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-vue": "^10.0.0",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "sass": "^1.85.1",
+    "sass-loader": "^16.0.5"
   }
 }
