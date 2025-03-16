@@ -1,0 +1,26 @@
+# Nuxt build output
+.nuxt
+dist
+.output
+.data
+.cache
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.env
+.env.*
+!.env.example
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml 
