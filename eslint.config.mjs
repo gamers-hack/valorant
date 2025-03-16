@@ -115,6 +115,14 @@ export default withNuxt([
       'vue/valid-define-props': 'error',
       'vue/valid-define-emits': 'error',
       'vue/require-explicit-emits': 'error',
+      'vue/html-self-closing': [
+        'error',
+        {
+          html: {
+            void: 'any',
+          },
+        },
+      ],
     },
   },
   {
