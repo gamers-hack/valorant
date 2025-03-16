@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   imports: {
     autoImport: false,
   },
+  css: ['normalize.css', 'the-new-css-reset', '@/assets/style/global.scss'],
   typescript: {
     strict: true,
     tsConfig: {
