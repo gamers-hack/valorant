@@ -10,4 +10,16 @@ export default defineNuxtConfig({
   imports: {
     autoImport: false,
   },
+  typescript: {
+    strict: true,
+    tsConfig: {
+      compilerOptions: {
+        paths: {
+          '@': ['src'],
+          '@/*': ['src/*'],
+          '#hooks/*': ['../src/hooks/*'],
+        },
+      },
+    },
+  },
 });
