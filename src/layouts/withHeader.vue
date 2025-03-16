@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <DefaultHeader />
     <NuxtPage />
   </div>
@@ -8,3 +8,11 @@
 <script setup lang="ts">
 import DefaultHeader from '@/uiParts/DefaultHeader.vue';
 </script>
+
+<style lang="scss" scoped>
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+</style>

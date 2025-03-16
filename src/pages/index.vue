@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import MapSection from '@/uiParts/mapSelector/MapSection.vue';
 import { definePageMeta } from '~~/.nuxt/imports';
-import Button from '@/uiParts/Button.vue';
 
 definePageMeta({
   layout: 'with-header',
@@ -8,45 +8,22 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="container">
-    <h1>Valorantアプリケーション</h1>
-    <p>このアプリはValorantに関する情報を提供します</p>
-
-    <div class="button-container">
-      <Button primary>プライマリーボタン</Button>
-      <Button>セカンダリーボタン</Button>
-      <Button small>小さいボタン</Button>
+  <div class="page">
+    <div class="page__left" />
+    <div class="page__center">
+      <MapSection />
     </div>
-
-    <div class="scss-example">
-      <h2>SCSSサンプル</h2>
-    </div>
+    <div class="page__right" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.button-container {
+.page {
   display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
+  height: 100%;
 
-h1 {
-  color: #4f46e5;
-  margin-bottom: 1rem;
-}
-
-.scss-example {
-  margin-top: 2rem;
-
-  h2 {
-    margin-bottom: 1rem;
+  &__center {
+    flex: 1;
   }
 }
 </style>
