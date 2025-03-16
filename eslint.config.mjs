@@ -30,6 +30,18 @@ export default withNuxt([
     },
   },
   {
+    // 相対パスの親ディレクトリ参照を禁止するルール
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [],
+          patterns: ['../*'],
+        },
+      ],
+    },
+  },
+  {
     // 共通ルール
     rules: {
       'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
