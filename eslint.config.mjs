@@ -106,6 +106,15 @@ export default withNuxt([
       'vue/no-v-html': 'warn',
       'vue/require-default-prop': 'error',
       'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+      'vue/no-undef-components': [
+        'error',
+        {
+          ignorePatterns: ['NuxtPage', 'NuxtLayout', 'NuxtLink'],
+        },
+      ],
+      'vue/valid-define-props': 'error',
+      'vue/valid-define-emits': 'error',
+      'vue/require-explicit-emits': 'error',
     },
   },
   {
