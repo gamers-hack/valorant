@@ -178,7 +178,7 @@ const getLinePoints = computed(() => {
 <style lang="scss" scoped>
 .page {
   display: flex;
-  height: 100%;
+  height: calc(100% - 72px);
 
   &__left {
     width: 300px;
