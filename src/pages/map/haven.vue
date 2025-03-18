@@ -76,7 +76,7 @@ const mapImageUrl = 'https://placehold.jp/1000x1000.png';
   <div class="page">
     <!-- 左側のサイドメニュー -->
     <div class="page__left">
-      <MapLeftMenu />
+      <MapLeftMenu map-name="Haven - ヘイヴン" />
     </div>
     <!-- メインコンテンツエリア（マップ表示） -->
     <div class="page__main">

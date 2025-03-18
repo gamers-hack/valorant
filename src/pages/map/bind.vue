@@ -73,7 +73,7 @@ const mapImageUrl = 'https://placehold.jp/1000x1000.png';
   <div class="page">
     <!-- 左側のサイドメニュー -->
     <div class="page__left">
-      <MapLeftMenu />
+      <MapLeftMenu map-name="Bind - バインド" />
     </div>
     <!-- メインコンテンツエリア（マップ表示） -->
     <div class="page__main">

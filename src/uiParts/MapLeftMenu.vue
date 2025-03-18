@@ -6,10 +6,19 @@
  * エージェント（キャラクター）選択のUIを提供する。
  *
  * 構成：
+ * - マップ名タイトル（h2）
  * - エージェント選択セクション
  * - エージェントカードのグリッド表示
  */
 import AgentCard from './agentSelector/AgentCard.vue';
+
+/**
+ * コンポーネントのプロパティ定義
+ * @property mapName - 表示するマップの名前
+ */
+defineProps<{
+  mapName?: string;
+}>();
 
 /**
  * エージェント（キャラクター）の型定義
@@ -83,6 +92,8 @@ const agents: Agent[] = [
 
 <template>
   <div>
+    <!-- マップ名のタイトル表示（propsで受け取った場合のみ表示） -->
+    <h2 v-if="mapName" class="map-title">{{ mapName }}</h2>
     <!-- キャラクター選択タイトル -->
     <p>キャラ選択</p>
     <!-- エージェントカードのグリッド表示 -->
@@ -99,6 +110,14 @@ const agents: Agent[] = [
 </template>
 
 <style lang="scss" scoped>
+.map-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: $color-primary;
+  text-align: center;
+}
+
 .agent-card-container {
   &__card {
     display: inline-block;
