@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MapSection from '@/uiParts/mapSelector/MapSection.vue';
-import { definePageMeta } from '~~/.nuxt/imports';
 
 definePageMeta({
   layout: 'with-header',
