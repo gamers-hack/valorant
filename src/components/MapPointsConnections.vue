@@ -1,6 +1,25 @@
 <script setup lang="ts">
+/**
+ * MapPointsConnections.vue
+ *
+ * マップ上に赤い点（メインポイント）と青い点（サブポイント）を表示し、
+ * ホバー時に点同士の接続線を表示するコンポーネント。
+ *
+ * 機能：
+ * - 赤い点（メインポイント）と青い点（サブポイント）の表示
+ * - ホバー時の接続線表示
+ * - ズーム操作のハンドリング
+ * - 点のホバー状態によるフィルタリング
+ */
 import { ref, computed, defineProps, defineEmits } from 'vue';
 
+/**
+ * 点（ポイント）の基本インターフェース
+ * @property id - ポイントの一意識別子
+ * @property x - マップ上のX座標（0-100%）
+ * @property y - マップ上のY座標（0-100%）
+ * @property name - ポイントの表示名
+ */
 interface Point {
   id: number;
   x: number;
@@ -8,10 +27,19 @@ interface Point {
   name: string;
 }
 
+/**
+ * 青い点（サブポイント）のインターフェース
+ * Pointを継承し、紐づく赤い点（メインポイント）のIDを持つ
+ * @property redPointId - 関連する赤い点のID
+ */
 interface BluePoint extends Point {
   redPointId: number;
 }
 
+/**
+ * 接続線の座標を表すインターフェース
+ * 未使用だが型定義のリファレンス用に残す
+ */
 interface _LinePoint {
   x1: number;
   y1: number;
@@ -19,6 +47,9 @@ interface _LinePoint {
   y2: number;
 }
 
+/**
+ * コンポーネントのプロパティ定義
+ */
 const props = defineProps({
   // 赤い点のデータ配列
   redPoints: {
@@ -42,14 +73,31 @@ const props = defineProps({
   },
 });
 
+/**
+ * イベントの発行定義
+ * wheel: ズーム操作時に親コンポーネントに通知
+ */
 const emit = defineEmits(['wheel']);
 
-// 現在ホバーしている赤い点のID
+/**
+ * 現在ホバーしている赤い点のID
+ * null の場合はホバーしていない状態
+ */
 const hoveredRedPointId = ref<number | null>(null);
-// 現在ホバーしている青い点のID
+
+/**
+ * 現在ホバーしている青い点のID
+ * null の場合はホバーしていない状態
+ */
 const hoveredBluePointId = ref<number | null>(null);
 
-// 表示する青い点
+/**
+ * 表示する青い点を計算するcomputed
+ * ホバー状態によって表示する点が変わる
+ * 1. 青い点にホバー: そのホバーした青い点のみ表示
+ * 2. 赤い点にホバー: その赤い点に紐づく青い点を表示
+ * 3. ホバーなし: すべての青い点を表示
+ */
 const visibleBluePoints = computed(() => {
   // 青い点にホバーしている場合、そのホバーした青い点のみを表示
   if (hoveredBluePointId.value) {
@@ -63,7 +111,12 @@ const visibleBluePoints = computed(() => {
   return props.bluePoints;
 });
 
-// 表示する赤い点
+/**
+ * 表示する赤い点を計算するcomputed
+ * ホバー状態によって表示する点が変わる
+ * 1. 青い点にホバー: その青い点に紐づく赤い点のみ表示
+ * 2. ホバーなし/赤い点ホバー: すべての赤い点を表示
+ */
 const visibleRedPoints = computed(() => {
   // 青い点にホバーしている場合、その青い点に紐づく赤い点のみを表示
   if (hoveredBluePointId.value) {
@@ -76,29 +129,44 @@ const visibleRedPoints = computed(() => {
   return props.redPoints;
 });
 
-// 青い点にホバーした時の処理
+/**
+ * 青い点にホバーした時の処理
+ * @param pointId - ホバーした青い点のID
+ */
 const handleBluePointHover = (pointId: number) => {
   hoveredBluePointId.value = pointId;
   hoveredRedPointId.value = null; // 赤い点のホバー状態をクリア
 };
 
-// 青い点からホバーが外れた時の処理
+/**
+ * 青い点からホバーが外れた時の処理
+ */
 const handleBluePointLeave = () => {
   hoveredBluePointId.value = null;
 };
 
-// 赤い点にホバーした時の処理
+/**
+ * 赤い点にホバーした時の処理
+ * @param pointId - ホバーした赤い点のID
+ */
 const handleRedPointHover = (pointId: number) => {
   hoveredRedPointId.value = pointId;
   hoveredBluePointId.value = null; // 青い点のホバー状態をクリア
 };
 
-// 赤い点からホバーが外れた時の処理
+/**
+ * 赤い点からホバーが外れた時の処理
+ */
 const handleRedPointLeave = () => {
   hoveredRedPointId.value = null;
 };
 
-// 接続線を表示するかどうかの判定
+/**
+ * 接続線を表示するかどうかを判定するcomputed
+ * 以下の条件で接続線を表示:
+ * 1. 赤い点にホバーしていて、その赤い点に紐づく青い点がある
+ * 2. 青い点にホバーしていて、表示する赤い点がある
+ */
 const showConnections = computed(() => {
   return (
     (hoveredRedPointId.value &&
@@ -107,7 +175,13 @@ const showConnections = computed(() => {
   );
 });
 
-// 接続線の開始点と終点を取得
+/**
+ * 接続線の開始点と終点を取得するcomputed
+ * ホバー状態に応じて異なる接続線を計算:
+ * 1. 青い点にホバー: その青い点と関連する赤い点を結ぶ線
+ * 2. 赤い点にホバー: その赤い点と関連するすべての青い点を結ぶ線
+ * @returns 接続線の座標情報の配列
+ */
 const getLinePoints = computed(() => {
   if (hoveredBluePointId.value) {
     // 青い点にホバーしている場合
@@ -143,7 +217,11 @@ const getLinePoints = computed(() => {
   return [];
 });
 
-// ホイール操作時の処理
+/**
+ * ホイール操作時の処理
+ * 親コンポーネントにwheelイベントを発行
+ * @param event - ホイールイベント
+ */
 const handleWheel = (event: WheelEvent) => {
   emit('wheel', event);
 };
