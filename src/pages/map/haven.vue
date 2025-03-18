@@ -1,12 +1,12 @@
 <script setup lang="ts">
 /**
- * Abyss.vue - 深淵マップページコンポーネント
+ * Haven.vue - ヘイブンマップページコンポーネント
  *
- * 深淵マップを表示し、マップ上の重要ポイントとそれに紐づくサブポイントを
+ * ヘイブンマップを表示し、マップ上の重要ポイントとそれに紐づくサブポイントを
  * インタラクティブに表示するページコンポーネント。
  *
  * 機能：
- * - 深淵マップの表示
+ * - ヘイブンマップの表示
  * - ズーム機能
  * - 赤い点（メインポイント）と青い点（サブポイント）の表示
  * - サイドメニューの表示
@@ -24,7 +24,7 @@ import MapPointsConnections from '@/components/MapPointsConnections.vue';
 // withHeaderレイアウトを使用するためのメタ設定
 definePageMeta({
   layout: 'with-header',
-  name: 'map-abyss',
+  name: 'map-haven',
 });
 
 /**
@@ -41,9 +41,10 @@ const { scale, handleWheel } = useMapZoom();
  * name: ポイントの名前（ホバー時に表示）
  */
 const redPoints = ref([
-  { id: 1, x: 20, y: 30, name: 'ポイントA' },
-  { id: 2, x: 60, y: 70, name: 'ポイントB' },
-  { id: 3, x: 40, y: 50, name: 'ポイントC' },
+  { id: 1, x: 20, y: 15, name: 'サイトA' },
+  { id: 2, x: 80, y: 15, name: 'サイトC' },
+  { id: 3, x: 50, y: 80, name: 'サイトB' },
+  { id: 4, x: 50, y: 50, name: 'ミッド' },
 ]);
 
 /**
@@ -54,11 +55,14 @@ const redPoints = ref([
  * name: ポイントの名前（ホバー時に表示）
  */
 const bluePoints = ref([
-  { id: 1, redPointId: 1, x: 30, y: 35, name: '子ポイントA1' },
-  { id: 2, redPointId: 1, x: 25, y: 40, name: '子ポイントA2' },
-  { id: 3, redPointId: 2, x: 70, y: 65, name: '子ポイントB1' },
-  { id: 4, redPointId: 2, x: 65, y: 80, name: '子ポイントB2' },
-  { id: 5, redPointId: 3, x: 50, y: 55, name: '子ポイントC1' },
+  { id: 1, redPointId: 1, x: 15, y: 25, name: 'Aロング' },
+  { id: 2, redPointId: 1, x: 25, y: 10, name: 'Aショート' },
+  { id: 3, redPointId: 2, x: 85, y: 25, name: 'Cロング' },
+  { id: 4, redPointId: 2, x: 75, y: 10, name: 'Cリンク' },
+  { id: 5, redPointId: 3, x: 45, y: 70, name: 'Bメイン' },
+  { id: 6, redPointId: 3, x: 55, y: 85, name: 'ガレージ' },
+  { id: 7, redPointId: 4, x: 45, y: 45, name: '窓' },
+  { id: 8, redPointId: 4, x: 55, y: 55, name: 'ドア' },
 ]);
 
 /**

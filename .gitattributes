@@ -1,0 +1,15 @@
+# 全てのテキストファイルの改行コードをLFに正規化
+* text=auto eol=lf
+
+# バイナリファイルは改行コード変換を行わない
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.ttf binary
+*.woff binary
+*.woff2 binary 
