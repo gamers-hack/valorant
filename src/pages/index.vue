@@ -34,7 +34,8 @@ definePageMeta({
 <style lang="scss" scoped>
 .page {
   display: flex;
-  height: 100%;
+  /* ヘッダーの高さ(72px)を引いて、コンテンツエリアの高さを調整 */
+  height: calc(100% - 72px);
 
   &__center {
     flex: 1;
