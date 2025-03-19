@@ -34,7 +34,7 @@ definePageMeta({
 <style lang="scss" scoped>
 .page {
   display: flex;
-  height: 100%;
+  height: calc(100% - 72px);
 
   &__center {
     flex: 1;
